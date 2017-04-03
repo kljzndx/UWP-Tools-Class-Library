@@ -107,6 +107,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailEx.cs" />
     <Compile Include="MessageBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\HappyStudio.UwpToolsLibrary.Auxiliarys.rd.xml" />
