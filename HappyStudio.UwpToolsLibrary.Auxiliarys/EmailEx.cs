@@ -9,9 +9,9 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
 {
     public static class EmailEx
     {
-        public static async Task Send(string to, string subject, string body)
+        public static async Task<bool> SendAsync(string to, string subject, string body)
         {
-            await Launcher.LaunchUriAsync(new Uri($"mailto:{to}?subject={subject}&body={body.Replace("\n", "%0A")}"));
+            return await Launcher.LaunchUriAsync(new Uri($"mailto:{to}?subject={subject}&body={body.Replace("\n", "%0A")}"));
         }
     }
 }
