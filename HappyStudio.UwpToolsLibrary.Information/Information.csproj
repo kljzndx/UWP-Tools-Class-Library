@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{689EDF47-EB1A-44E3-8454-7505C41D7520}</ProjectGuid>
+    <ProjectGuid>{BCE74699-1F59-4CEB-B9CD-95B9830BF730}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HappyStudio.UwpToolsLibrary.Auxiliarys</RootNamespace>
-    <AssemblyName>HappyStudio.UwpToolsLibrary.Auxiliarys</AssemblyName>
+    <RootNamespace>HappyStudio.UwpToolsLibrary.Information</RootNamespace>
+    <AssemblyName>HappyStudio.UwpToolsLibrary.Information</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -107,10 +107,10 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmailEx.cs" />
-    <Compile Include="MessageBox.cs" />
+    <Compile Include="AppInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\HappyStudio.UwpToolsLibrary.Auxiliarys.rd.xml" />
+    <Compile Include="SystemInfo.cs" />
+    <EmbeddedResource Include="Properties\HappyStudio.UwpToolsLibrary.Information.rd.xml" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
