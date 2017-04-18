@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("HappyStudio.UwpToolsLibrary.Information")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("UWP工具库的信息类库")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HappyStudio.UwpToolsLibrary.Information")]
+[assembly: AssemblyCompany("快乐工作室")]
+[assembly: AssemblyProduct("UwpToolsLibrary")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

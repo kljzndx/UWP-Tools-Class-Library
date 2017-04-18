@@ -13,6 +13,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
         {
             return await Launcher.LaunchUriAsync(new Uri($"ms-windows-store://publisher/?name={developerName}"));
         }
+
         public static async Task<bool> WriteReviewAsync(string appStoreID)
         {
             return await Launcher.LaunchUriAsync(new Uri($"ms-windows-store://review/?ProductId={appStoreID}"));

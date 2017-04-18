@@ -30,5 +30,6 @@ namespace HappyStudio.UwpToolsLibrary.Information
                 return Double.Parse(version);
             }
         }
+        
     }
 }
