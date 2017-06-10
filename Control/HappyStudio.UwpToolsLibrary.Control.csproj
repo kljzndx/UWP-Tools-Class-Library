@@ -111,6 +111,9 @@
     <Compile Include="Expander.xaml.cs">
       <DependentUpon>Expander.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FrostedGlassBackground.xaml.cs">
+      <DependentUpon>FrostedGlassBackground.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\HappyStudio.UwpToolsLibrary.Control.rd.xml">
       <SubType>Designer</SubType>
@@ -118,6 +121,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Expander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FrostedGlassBackground.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
