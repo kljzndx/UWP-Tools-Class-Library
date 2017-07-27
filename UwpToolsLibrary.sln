@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26724.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyStudio.UwpToolsLibrary.Auxiliarys", "Auxiliarys\HappyStudio.UwpToolsLibrary.Auxiliarys.csproj", "{689EDF47-EB1A-44E3-8454-7505C41D7520}"
 EndProject
@@ -90,5 +90,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {478A5D93-137F-4D78-BE04-5D6A37FA0EC4}
 	EndGlobalSection
 EndGlobal

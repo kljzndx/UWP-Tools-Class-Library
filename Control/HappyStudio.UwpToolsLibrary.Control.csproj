@@ -108,11 +108,15 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\LoadingStyleType.cs" />
     <Compile Include="Expander.xaml.cs">
       <DependentUpon>Expander.xaml</DependentUpon>
     </Compile>
     <Compile Include="FrostedGlassBackground.xaml.cs">
       <DependentUpon>FrostedGlassBackground.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\HappyStudio.UwpToolsLibrary.Control.rd.xml">
@@ -125,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FrostedGlassBackground.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

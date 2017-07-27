@@ -20,13 +20,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button x:Name="Expand_Button" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="{x:Bind Padding,Mode=OneWay}" Click="Expand_Button_Click">
+        <ToggleButton x:Name="Expand_ToggleButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="{x:Bind Padding,Mode=OneWay}" Click="Expand_ToggleButton_Click">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="&#xE0AB;" FontFamily="Segoe MDL2 Assets" FontSize="{x:Bind FontSize,Mode=OneWay}" FontWeight="{x:Bind FontWeight,Mode=OneWay}" VerticalAlignment="Center" Visibility="{x:Bind IsExPanded,Mode=OneWay,Converter={StaticResource boolToVisibility_Reverse}}"/>
                 <TextBlock Text="&#xE1FD;" FontFamily="Segoe MDL2 Assets" FontSize="{x:Bind FontSize,Mode=OneWay}" FontWeight="{x:Bind FontWeight,Mode=OneWay}" VerticalAlignment="Center" Visibility="{x:Bind IsExPanded,Mode=OneWay,Converter={StaticResource boolToVisibility}}"/>
-                <TextBlock Text="{x:Bind Header,Mode=OneWay}" TextWrapping="Wrap" FontFamily="{x:Bind FontFamily,Mode=OneWay}" FontSize="{x:Bind FontSize,Mode=OneWay}" FontWeight="{x:Bind FontWeight,Mode=OneWay}" Margin="20,0"/>
+                <ContentPresenter Content="{x:Bind Header,Mode=OneWay}" Margin="20,0"/>
             </StackPanel>
-        </Button>
+        </ToggleButton>
         <ContentPresenter Grid.Row="1" Content="{x:Bind ExpandContent,Mode=OneWay}" Visibility="{x:Bind IsExPanded,Mode=OneWay,Converter={StaticResource boolToVisibility}}"/>
     </Grid>
 </UserControl>

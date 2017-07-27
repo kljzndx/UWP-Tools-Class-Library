@@ -27,20 +27,20 @@ namespace HappyStudio.UwpToolsLibrary.Control
             get { return (bool)GetValue(IsExPandedProperty); }
             set { SetValue(IsExPandedProperty, value); }
         }
-
+        
         // Using a DependencyProperty as the backing store for IsExPanded.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsExPandedProperty =
             DependencyProperty.Register("IsExPanded", typeof(bool), typeof(Expander), new PropertyMetadata(false));
         
-        public string Header
+        public object Header
         {
-            get { return (string)GetValue(HeaderProperty); }
+            get { return (object)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Header.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeaderProperty =
-            DependencyProperty.Register("Header", typeof(string), typeof(Expander), new PropertyMetadata(String.Empty));
+            DependencyProperty.Register("Header", typeof(object), typeof(Expander), new PropertyMetadata(String.Empty));
         
         public object ExpandContent
         {
@@ -55,11 +55,13 @@ namespace HappyStudio.UwpToolsLibrary.Control
         public Expander()
         {
             this.InitializeComponent();
+            Expand_ToggleButton.IsChecked = IsExPanded;
         }
 
-        private void Expand_Button_Click(object sender, RoutedEventArgs e)
+        private void Expand_ToggleButton_Click(object sender, RoutedEventArgs e)
         {
             IsExPanded = !IsExPanded;
+            (sender as ToggleButton).IsChecked = IsExPanded;
         }
     }
 }
