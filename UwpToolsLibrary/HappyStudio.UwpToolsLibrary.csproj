@@ -107,6 +107,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueConverter\BoolToBoolNullable.cs" />
     <Compile Include="ValueConverter\BoolToVisibility.cs" />
     <Compile Include="ValueConverter\BoolToVisibility_Reverse.cs" />
     <Compile Include="ValueConverter\DoubleToInt32.cs" />

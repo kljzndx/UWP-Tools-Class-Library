@@ -13,6 +13,7 @@
     <UserControl.Resources>
         <cvt:BoolToVisibility x:Key="boolToVisibility"/>
         <cvt:BoolToVisibility_Reverse x:Key="boolToVisibility_Reverse"/>
+        <cvt:BoolToBoolNullable x:Key="boolToBoolNullable"/>
     </UserControl.Resources>
 
     <Grid>
@@ -20,11 +21,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ToggleButton x:Name="Expand_ToggleButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="{x:Bind Padding,Mode=OneWay}" Click="Expand_ToggleButton_Click">
+        <ToggleButton x:Name="Expand_ToggleButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Padding="{x:Bind Padding,Mode=OneWay}" IsChecked="{x:Bind IsExPanded, Mode=TwoWay,Converter={StaticResource boolToBoolNullable}}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="&#xE0AB;" FontFamily="Segoe MDL2 Assets" FontSize="{x:Bind FontSize,Mode=OneWay}" FontWeight="{x:Bind FontWeight,Mode=OneWay}" VerticalAlignment="Center" Visibility="{x:Bind IsExPanded,Mode=OneWay,Converter={StaticResource boolToVisibility_Reverse}}"/>
-                <TextBlock Text="&#xE1FD;" FontFamily="Segoe MDL2 Assets" FontSize="{x:Bind FontSize,Mode=OneWay}" FontWeight="{x:Bind FontWeight,Mode=OneWay}" VerticalAlignment="Center" Visibility="{x:Bind IsExPanded,Mode=OneWay,Converter={StaticResource boolToVisibility}}"/>
-                <ContentPresenter Content="{x:Bind Header,Mode=OneWay}" Margin="20,0"/>
+                <StackPanel Margin="0,0,20,0" Visibility="{x:Bind IsDisplaySign,Mode=OneWay,Converter={StaticResource boolToVisibility}}">
+                    <ContentPresenter Content="{x:Bind NormalStateSign,Mode=OneWay}" Visibility="{x:Bind IsExPanded,Mode=OneWay,Converter={StaticResource boolToVisibility_Reverse}}"/>
+                <ContentPresenter Content="{x:Bind ActvateStateSign,Mode=OneWay}" Visibility="{x:Bind IsExPanded,Mode=OneWay,Converter={StaticResource boolToVisibility}}"/>
+                </StackPanel>
+                <ContentPresenter Content="{x:Bind Header,Mode=OneWay}"/>
             </StackPanel>
         </ToggleButton>
         <ContentPresenter Grid.Row="1" Content="{x:Bind ExpandContent,Mode=OneWay}" Visibility="{x:Bind IsExPanded,Mode=OneWay,Converter={StaticResource boolToVisibility}}"/>

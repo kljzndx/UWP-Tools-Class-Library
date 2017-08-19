@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="Test.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Test"
+    xmlns:pctol="using:HappyStudio.UwpToolsLibrary.Control"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <pctol:Expander Header="测试" IsExPanded="True">
+            <Border Background="DeepSkyBlue">
+                <TextBlock Text="这是内容区" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </pctol:Expander>
+    </Grid>
+</Page>
