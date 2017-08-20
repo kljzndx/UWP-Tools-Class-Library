@@ -18,7 +18,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void InitializeSettingFields()
+        protected void InitializeSettingFields()
         {
             var fieldInfos = this.GetType().GetTypeInfo().DeclaredFields;
 
