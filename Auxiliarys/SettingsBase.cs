@@ -7,7 +7,7 @@ using HappyStudio.UwpToolsLibrary.Auxiliarys.Attributes;
 
 namespace HappyStudio.UwpToolsLibrary.Auxiliarys
 {
-    public class SettingsBase : INotifyPropertyChanged
+    public abstract class SettingsBase : INotifyPropertyChanged
     {
         public ApplicationDataContainer SettingObject => ApplicationData.Current.LocalSettings;
 
@@ -20,7 +20,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
 
         public void InitializeSettingFields()
         {
-            var fieldInfos = this.GetType().DeclaringType.GetFields();
+            var fieldInfos = this.GetType().GetTypeInfo().DeclaredFields;
 
             foreach (FieldInfo field in fieldInfos)
             {
