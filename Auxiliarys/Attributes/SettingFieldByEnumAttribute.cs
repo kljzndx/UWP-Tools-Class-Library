@@ -4,9 +4,9 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys.Attributes
 {
     public sealed class SettingFieldByEnumAttribute : SettingFieldBaseAttribute
     {
-        public SettingFieldByEnumAttribute(string settingName, Enum defaultValue) : base(settingName, defaultValue)
+        public SettingFieldByEnumAttribute(string settingName, Type enumType, string defaultValue) : base(settingName, defaultValue)
         {
-            Converter = str => Enum.Parse(defaultValue.GetType(), str);
+            Converter = str => Enum.Parse(enumType, str);
         }
     }
 }

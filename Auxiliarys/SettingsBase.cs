@@ -61,12 +61,16 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             OnPropertyChanged(propertyName);
         }
 
-        protected virtual void SetSetting<T>(ref T field, T value, string settingName = null, [CallerMemberName] string propertyName = null)
+        protected virtual void SetSetting<T>(ref T field, T value, string settingName = null, string settingValue = null, [CallerMemberName] string propertyName = null)
         {
             if (field.Equals(value))
                 return;
 
-            SettingObject.Values[settingName ?? propertyName] = value;
+            if (settingValue is null)
+                SettingObject.Values[settingName ?? propertyName] = value;
+            else
+                SettingObject.Values[settingName ?? propertyName] = settingValue;
+
             Set(ref field, value, propertyName);
         }
 

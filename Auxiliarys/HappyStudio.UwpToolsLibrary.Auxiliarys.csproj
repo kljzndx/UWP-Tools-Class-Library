@@ -112,7 +112,6 @@
     <Compile Include="Attributes\SettingFieldByNormalAttribute.cs" />
     <Compile Include="EmailEx.cs" />
     <Compile Include="MessageBox.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\SettingFieldBaseAttribute.cs" />
     <Compile Include="SettingsBase.cs" />
