@@ -10,15 +10,14 @@ namespace HappyStudio.UwpToolsLibrary.Control
 {
     public sealed class ButtonEx : ButtonBase
     {
+        private static readonly DependencyProperty CurrentBackgroundProperty = DependencyProperty.Register(
+            nameof(CurrentBackground), typeof(Brush), typeof(ButtonEx), new PropertyMetadata(null));
 
-        public static readonly DependencyProperty NormalBackgroundProperty = DependencyProperty.Register(
-            nameof(NormalBackground), typeof(Brush), typeof(ButtonEx), new PropertyMetadata(null));
+        private static readonly DependencyProperty CurrentForegroundProperty = DependencyProperty.Register(
+            nameof(CurrentForeground), typeof(Brush), typeof(ButtonEx), new PropertyMetadata(null));
 
-        public static readonly DependencyProperty NormalForegroundProperty = DependencyProperty.Register(
-            nameof(NormalForeground), typeof(Brush), typeof(ButtonEx), new PropertyMetadata(null));
-
-        public static readonly DependencyProperty NormalBorderBrushProperty = DependencyProperty.Register(
-            nameof(NormalBorderBrush), typeof(Brush), typeof(ButtonEx), new PropertyMetadata(null));
+        private static readonly DependencyProperty CurrentBorderBrushProperty = DependencyProperty.Register(
+            nameof(CurrentBorderBrush), typeof(Brush), typeof(ButtonEx), new PropertyMetadata(null));
 
         public static readonly DependencyProperty PointerOverBackgroundProperty = DependencyProperty.Register(
             nameof(PointerOverBackground), typeof(Brush), typeof(ButtonEx), new PropertyMetadata(null));
@@ -47,33 +46,37 @@ namespace HappyStudio.UwpToolsLibrary.Control
         public static readonly DependencyProperty DisabledBorderBrushProperty = DependencyProperty.Register(
             nameof(DisabledBorderBrush), typeof(Brush), typeof(ButtonEx), new PropertyMetadata(null));
 
+        public static readonly DependencyProperty RingVisibilityProperty = DependencyProperty.Register(
+            nameof(RingVisibility), typeof(Visibility), typeof(ButtonEx), new PropertyMetadata(Visibility.Collapsed));
+
         private ProgressRing _ring;
-        private double Size => Width <= Height ? Width : Height;
-        
+
         public ButtonEx()
         {
             DefaultStyleKey = typeof(ButtonEx);
-            
+
             IsEnabledChanged += ButtonEx_IsEnabledChanged;
             SizeChanged += ButtonEx_SizeChanged;
         }
 
-        public Brush NormalBackground
+        private double Size => Width <= Height ? Width : Height;
+
+        public Brush CurrentBackground
         {
-            get => (Brush) GetValue(NormalBackgroundProperty);
-            set => SetValue(NormalBackgroundProperty, value);
+            get => (Brush) GetValue(CurrentBackgroundProperty);
+            private set => SetValue(CurrentBackgroundProperty, value);
         }
 
-        public Brush NormalForeground
+        public Brush CurrentForeground
         {
-            get => (Brush) GetValue(NormalForegroundProperty);
-            set => SetValue(NormalForegroundProperty, value);
+            get => (Brush) GetValue(CurrentForegroundProperty);
+            private set => SetValue(CurrentForegroundProperty, value);
         }
 
-        public Brush NormalBorderBrush
+        public Brush CurrentBorderBrush
         {
-            get => (Brush) GetValue(NormalBorderBrushProperty);
-            set => SetValue(NormalBorderBrushProperty, value);
+            get => (Brush) GetValue(CurrentBorderBrushProperty);
+            private set => SetValue(CurrentBorderBrushProperty, value);
         }
 
         public Brush PointerOverBackground
@@ -130,9 +133,6 @@ namespace HappyStudio.UwpToolsLibrary.Control
             set => SetValue(DisabledBorderBrushProperty, value);
         }
 
-        public static readonly DependencyProperty RingVisibilityProperty = DependencyProperty.Register(
-            nameof(RingVisibility), typeof(Visibility), typeof(ButtonEx), new PropertyMetadata(Visibility.Collapsed));
-
         public Visibility RingVisibility
         {
             get => (Visibility) GetValue(RingVisibilityProperty);
@@ -143,7 +143,7 @@ namespace HappyStudio.UwpToolsLibrary.Control
                 IsEnabled = value == Visibility.Collapsed;
             }
         }
-        
+
         private bool GoToState(string stateName)
         {
             return VisualStateManager.GoToState(this, stateName, true);
@@ -151,9 +151,9 @@ namespace HappyStudio.UwpToolsLibrary.Control
 
         private void SwitchStyle(Brush background, Brush foreground, Brush borderBrush)
         {
-            Background = background;
-            Foreground = foreground;
-            BorderBrush = borderBrush;
+            CurrentBackground = background;
+            CurrentForeground = foreground;
+            CurrentBorderBrush = borderBrush;
         }
 
         protected override void OnPointerEntered(PointerRoutedEventArgs e)
@@ -164,7 +164,7 @@ namespace HappyStudio.UwpToolsLibrary.Control
 
         protected override void OnPointerExited(PointerRoutedEventArgs e)
         {
-            SwitchStyle(NormalBackground, NormalForeground, NormalBorderBrush);
+            SwitchStyle(Background, Foreground, BorderBrush);
             GoToState("PointerOver");
         }
 
@@ -179,26 +179,26 @@ namespace HappyStudio.UwpToolsLibrary.Control
 
         protected override void OnPointerReleased(PointerRoutedEventArgs e)
         {
-            SwitchStyle(NormalBackground, NormalForeground, NormalBorderBrush);
+            SwitchStyle(Background, Foreground, BorderBrush);
             GoToState("PointerOver");
         }
 
         protected override void OnPointerCanceled(PointerRoutedEventArgs e)
         {
-            SwitchStyle(NormalBackground, NormalForeground, NormalBorderBrush);
+            SwitchStyle(Background, Foreground, BorderBrush);
             GoToState("PointerOver");
         }
 
         protected override void OnPointerCaptureLost(PointerRoutedEventArgs e)
         {
-            SwitchStyle(NormalBackground, NormalForeground, NormalBorderBrush);
+            SwitchStyle(Background, Foreground, BorderBrush);
             GoToState("PointerOver");
         }
 
         private void ButtonEx_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if ((bool) e.NewValue)
-                SwitchStyle(NormalBackground, NormalForeground, NormalBorderBrush);
+                SwitchStyle(Background, Foreground, BorderBrush);
             else
                 SwitchStyle(DisabledBackground, DisabledForeground, DisabledBorderBrush);
 
@@ -213,7 +213,7 @@ namespace HappyStudio.UwpToolsLibrary.Control
 
         protected override void OnApplyTemplate()
         {
-            SwitchStyle(NormalBackground, NormalForeground, NormalBorderBrush);
+            SwitchStyle(Background, Foreground, BorderBrush);
 
             _ring = GetTemplateChild("ProgressRing") as ProgressRing;
 

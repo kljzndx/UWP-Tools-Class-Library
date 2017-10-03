@@ -10,9 +10,9 @@
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
         <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
 
-        <Setter Property="NormalBackground" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
-        <Setter Property="NormalForeground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-        <Setter Property="NormalBorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}"/>
+        <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}"/>
         <Setter Property="PointerOverBackground" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
         <Setter Property="PointerOverForeground" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
         <Setter Property="PointerOverBorderBrush" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}"/>
@@ -26,7 +26,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:ButtonEx">
-                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                    <Grid x:Name="RootGrid" Background="{TemplateBinding CurrentBackground}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup>
                                 <VisualState x:Name="PointerOver">
@@ -42,7 +42,7 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         
-                        <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding CurrentBorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Foreground="{TemplateBinding CurrentForeground}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         <ProgressRing x:Name="ProgressRing" IsActive="True" Visibility="{TemplateBinding RingVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
