@@ -7,6 +7,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
 using Windows.UI.Composition;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,12 +26,27 @@ namespace HappyStudio.UwpToolsLibrary.Control
     /// </summary>
     public sealed partial class FrostedGlassBackground : UserControl
     {
+        private bool _isOn;
+
         public FrostedGlassBackground()
         {
             this.InitializeComponent();
+            Window.Current.Activated += Window_Activated;
         }
 
-
+        private void Window_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
+        {
+            switch (e.WindowActivationState)
+            {
+                case CoreWindowActivationState.CodeActivated:
+                case CoreWindowActivationState.PointerActivated:
+                    FadeIn_Storyboard.Begin();
+                    break;
+                case CoreWindowActivationState.Deactivated:
+                    FadeOut_Storyboard.Begin();
+                    break;
+            }
+        }
 
         public Brush GlassBackgroundBrush
         {
@@ -71,10 +87,12 @@ namespace HappyStudio.UwpToolsLibrary.Control
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ApiInformation.IsMethodPresent(typeof(Compositor).FullName, "CreateHostBackdropBrush"))
+            if (ApiInformation.IsTypePresent("Windows.UI.Composition.CompositionBackdropBrush") &&
+                ApiInformation.IsMethodPresent("Windows.UI.Composition.Compositor", "CreateHostBackdropBrush"))
             {
                 this.FindName("Root_Grid");
                 InitializeFrostedGlass(Glass_Rectangle);
+                _isOn = true;
             }
         }
     }

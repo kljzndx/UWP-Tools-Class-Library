@@ -7,8 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="UserControl_Loaded">
 
+    <UserControl.Resources>
+        <Storyboard x:Name="FadeIn_Storyboard">
+            <FadeInThemeAnimation Storyboard.TargetName="Glass_Rectangle"/>
+        </Storyboard>
+        <Storyboard x:Name="FadeOut_Storyboard">
+            <FadeOutThemeAnimation Storyboard.TargetName="Glass_Rectangle"/>
+        </Storyboard>
+    </UserControl.Resources>
+
     <Grid x:Name="Root_Grid" x:DeferLoadStrategy="Lazy">
         <Rectangle x:Name="Glass_Rectangle"/>
-        <Rectangle Fill="{x:Bind GlassBackgroundBrush,Mode=OneWay}" Opacity="{x:Bind GlassOpacity,Mode=OneWay}"/>
+        <Rectangle Fill="{x:Bind GlassBackgroundBrush, Mode=OneWay}" Opacity="{x:Bind GlassOpacity, Mode=OneWay}"/>
     </Grid>
 </UserControl>
