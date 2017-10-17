@@ -36,16 +36,17 @@ namespace HappyStudio.UwpToolsLibrary.Control
 
         private void Window_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
         {
-            switch (e.WindowActivationState)
-            {
-                case CoreWindowActivationState.CodeActivated:
-                case CoreWindowActivationState.PointerActivated:
-                    FadeIn_Storyboard.Begin();
-                    break;
-                case CoreWindowActivationState.Deactivated:
-                    FadeOut_Storyboard.Begin();
-                    break;
-            }
+            if(_isOn)
+                switch (e.WindowActivationState)
+                {
+                    case CoreWindowActivationState.CodeActivated:
+                    case CoreWindowActivationState.PointerActivated:
+                        GlassFadeIn_Storyboard.Begin();
+                        break;
+                    case CoreWindowActivationState.Deactivated:
+                        GlassFadeOut_Storyboard.Begin();
+                        break;
+                }
         }
 
         public Brush GlassBackgroundBrush
