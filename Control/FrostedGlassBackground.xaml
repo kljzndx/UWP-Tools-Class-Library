@@ -8,10 +8,10 @@
     mc:Ignorable="d" Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
-        <Storyboard x:Name="GlassFadeIn_Storyboard">
+        <Storyboard x:Name="GlassFadeIn_Storyboard" x:Key="GlassFadeIn_Storyboard">
             <FadeInThemeAnimation Storyboard.TargetName="Glass_Rectangle"/>
         </Storyboard>
-        <Storyboard x:Name="GlassFadeOut_Storyboard">
+        <Storyboard x:Name="GlassFadeOut_Storyboard" x:Key="GlassFadeOut_Storyboard">
             <FadeOutThemeAnimation Storyboard.TargetName="Glass_Rectangle"/>
         </Storyboard>
     </UserControl.Resources>
