@@ -9,10 +9,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <pctol:Expander Header="测试" IsExPanded="True">
-            <Border Background="DeepSkyBlue">
-                <TextBlock Text="这是内容区" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Border>
-        </pctol:Expander>
+        <pctol:FrostedGlassBackground GlassOpacity="0.6"/>
     </Grid>
 </Page>

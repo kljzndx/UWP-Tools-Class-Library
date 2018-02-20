@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyStudio.UwpToolsLibrary.Auxiliarys", "Auxiliarys\HappyStudio.UwpToolsLibrary.Auxiliarys.csproj", "{689EDF47-EB1A-44E3-8454-7505C41D7520}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyStudio.UwpToolsLibrary.Control", "Control\HappyStudio.UwpToolsLibrary.Control.csproj", "{9BE5F558-B0FD-47FC-BFDF-C6DC34E24EC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyStudio.UwpToolsLibrary", "UwpToolsLibrary\HappyStudio.UwpToolsLibrary.csproj", "{C4964D28-2C45-4418-A080-25057EFAFF54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{17D2B3F0-6147-402D-B999-C9739A03A5D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,26 @@ Global
 		{C4964D28-2C45-4418-A080-25057EFAFF54}.Release|x64.Build.0 = Release|x64
 		{C4964D28-2C45-4418-A080-25057EFAFF54}.Release|x86.ActiveCfg = Release|x86
 		{C4964D28-2C45-4418-A080-25057EFAFF54}.Release|x86.Build.0 = Release|x86
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|ARM.ActiveCfg = Debug|ARM
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|ARM.Build.0 = Debug|ARM
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|ARM.Deploy.0 = Debug|ARM
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|x64.ActiveCfg = Debug|x64
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|x64.Build.0 = Debug|x64
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|x64.Deploy.0 = Debug|x64
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|x86.ActiveCfg = Debug|x86
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|x86.Build.0 = Debug|x86
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Debug|x86.Deploy.0 = Debug|x86
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|Any CPU.ActiveCfg = Release|x86
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|ARM.ActiveCfg = Release|ARM
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|ARM.Build.0 = Release|ARM
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|ARM.Deploy.0 = Release|ARM
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|x64.ActiveCfg = Release|x64
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|x64.Build.0 = Release|x64
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|x64.Deploy.0 = Release|x64
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|x86.ActiveCfg = Release|x86
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|x86.Build.0 = Release|x86
+		{17D2B3F0-6147-402D-B999-C9739A03A5D1}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
