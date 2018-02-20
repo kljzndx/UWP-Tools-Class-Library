@@ -10,14 +10,19 @@ namespace HappyStudio.UwpToolsLibrary.Information
 {
     public static class AppInfo
     {
-        public static string Name { get => Package.Current.DisplayName; }
-        public static string Version
+        public static string Name { get; }
+        public static string Version { get; }
+        public static string Path { get; }
+
+        static AppInfo()
         {
-            get
-            {
-                var version = Package.Current.Id.Version;
-                return $"{version.Major}.{version.Minor}.{version.Build}";
-            }
+            Package current = Package.Current;
+            Name = current.DisplayName;
+
+            var version = current.Id.Version;
+            Version = $"{version.Major}.{version.Minor}.{version.Build}";
+
+            Path = current.InstalledLocation.Path;
         }
     }
 }
