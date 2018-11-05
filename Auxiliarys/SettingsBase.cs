@@ -9,14 +9,19 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
 {
     public abstract class SettingsBase : INotifyPropertyChanged
     {
-        public ApplicationDataContainer SettingObject => ApplicationData.Current.LocalSettings;
+        protected SettingsBase()
+        {
+            SettingObject = ApplicationData.Current.LocalSettings;
+        }
+
+        protected SettingsBase(ApplicationDataContainer settingObject)
+        {
+            SettingObject = settingObject;
+        }
+
+        public readonly ApplicationDataContainer SettingObject;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         protected void InitializeSettingFields()
         {
@@ -83,10 +88,18 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             }
         }
 
-        public void RenameSettingValue<T>(string key, T oldValue, T newValue)
+        [Obsolete("Please use 'UpdateSettingValue' method")]
+        public void RenameSettingValue<T>(string key, T oldValue, T newValue) => UpdateSettingValue(key, oldValue, newValue);
+
+        public void UpdateSettingValue<T>(string key, T oldValue, T newValue)
         {
             if (SettingObject.Values.ContainsKey(key) && SettingObject.Values[key] == (object) oldValue)
                 SettingObject.Values[key] = newValue;
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
