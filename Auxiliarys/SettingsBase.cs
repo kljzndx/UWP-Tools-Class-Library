@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Windows.Storage;
@@ -16,13 +17,19 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
         protected SettingsBase(ApplicationDataContainer settingObject)
         {
             SettingObject = settingObject;
+            SetUpSettingFields();
         }
 
         public readonly ApplicationDataContainer SettingObject;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        [Obsolete("Automatic initialization has been achieved")]
         protected void InitializeSettingFields()
+        {
+        }
+
+        private void SetUpSettingFields()
         {
             var fieldInfos = this.GetType().GetTypeInfo().DeclaredFields;
 
