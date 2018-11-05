@@ -57,7 +57,7 @@ namespace HappyStudio.UwpToolsLibrary.Control
 
         private void ToggleButtonEx_OnUnchecked(object sender, RoutedEventArgs e)
         {
-            if (!IsSingle || !String.IsNullOrWhiteSpace(GroupName) && AllButtons[GroupName].Any(b => b.IsChecked.GetValueOrDefault(false)))
+            if (!IsSingle || String.IsNullOrWhiteSpace(GroupName) || !String.IsNullOrWhiteSpace(GroupName) && AllButtons[GroupName].Any(b => b.IsChecked.GetValueOrDefault(false)))
                 return;
 
             this.IsChecked = true;
