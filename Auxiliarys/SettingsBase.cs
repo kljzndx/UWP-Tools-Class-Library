@@ -9,9 +9,8 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
 {
     public abstract class SettingsBase : INotifyPropertyChanged
     {
-        protected SettingsBase()
+        protected SettingsBase() : this(ApplicationData.Current.LocalSettings)
         {
-            SettingObject = ApplicationData.Current.LocalSettings;
         }
 
         protected SettingsBase(ApplicationDataContainer settingObject)
