@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Windows.Storage;
@@ -23,7 +22,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
         protected SettingsBase(string containerKey) : this(ApplicationData.Current.LocalSettings.CreateContainer(containerKey, ApplicationDataCreateDisposition.Always))
         {
         }
-
+        
         public readonly ApplicationDataContainer SettingContainer;
 
         public event PropertyChangedEventHandler PropertyChanged;
