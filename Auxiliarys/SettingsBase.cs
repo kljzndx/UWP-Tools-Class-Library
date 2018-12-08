@@ -14,13 +14,17 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
         {
         }
 
-        protected SettingsBase(ApplicationDataContainer settingObject)
+        protected SettingsBase(ApplicationDataContainer container)
         {
-            SettingObject = settingObject;
+            SettingContainer = container;
             SetUpSettingFields();
         }
 
-        public readonly ApplicationDataContainer SettingObject;
+        protected SettingsBase(string containerKey) : this(ApplicationData.Current.LocalSettings.CreateContainer(containerKey, ApplicationDataCreateDisposition.Always))
+        {
+        }
+
+        public readonly ApplicationDataContainer SettingContainer;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -49,18 +53,18 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
 
         public T GetSetting<T>(string key, T defaultValue)
         {
-            if (SettingObject.Values.ContainsKey(key) == false)
-                SettingObject.Values[key] = defaultValue;
+            if (SettingContainer.Values.ContainsKey(key) == false)
+                SettingContainer.Values[key] = defaultValue;
 
-            return (T) SettingObject.Values[key];
+            return (T) SettingContainer.Values[key];
         }
 
         public T GetSetting<T>(string key, string defaultValue, Func<string, T> converter)
         {
-            if (SettingObject.Values.ContainsKey(key) == false)
-                SettingObject.Values[key] = defaultValue;
+            if (SettingContainer.Values.ContainsKey(key) == false)
+                SettingContainer.Values[key] = defaultValue;
 
-            return converter.Invoke(SettingObject.Values[key].ToString());
+            return converter.Invoke(SettingContainer.Values[key].ToString());
         }
 
         protected virtual void Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
@@ -78,19 +82,19 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
                 return;
 
             if (settingValue is null)
-                SettingObject.Values[settingName ?? propertyName] = value;
+                SettingContainer.Values[settingName ?? propertyName] = value;
             else
-                SettingObject.Values[settingName ?? propertyName] = settingValue;
+                SettingContainer.Values[settingName ?? propertyName] = settingValue;
 
             Set(ref field, value, propertyName);
         }
 
         public void RenameSettingKey(string oldKey, string newKey)
         {
-            if (SettingObject.Values.ContainsKey(oldKey))
+            if (SettingContainer.Values.ContainsKey(oldKey))
             {
-                SettingObject.Values[newKey] = SettingObject.Values[oldKey];
-                SettingObject.Values.Remove(oldKey);
+                SettingContainer.Values[newKey] = SettingContainer.Values[oldKey];
+                SettingContainer.Values.Remove(oldKey);
             }
         }
 
@@ -99,8 +103,8 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
 
         public void UpdateSettingValue<T>(string key, T oldValue, T newValue)
         {
-            if (SettingObject.Values.ContainsKey(key) && SettingObject.Values[key] == (object) oldValue)
-                SettingObject.Values[key] = newValue;
+            if (SettingContainer.Values.ContainsKey(key) && SettingContainer.Values[key] == (object) oldValue)
+                SettingContainer.Values[key] = newValue;
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
