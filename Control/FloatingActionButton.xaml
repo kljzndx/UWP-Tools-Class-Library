@@ -15,7 +15,7 @@
     FontFamily="Segoe MDL2 Assets" FontSize="18"
     HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 
-    <Button x:Name="Root_Button" Content="{x:Bind Glyph, Mode=OneWay}" Background="{x:Bind Background, Mode=OneWay}" Foreground="{x:Bind Foreground, Mode=OneWay}" Width="{x:Bind Width, Mode=OneWay}" Height="{x:Bind Height, Mode=OneWay}" FontSize="{x:Bind FontSize, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="{x:Bind HorizontalContentAlignment, Mode=OneWay}" VerticalContentAlignment="{x:Bind VerticalContentAlignment, Mode=OneWay}" Click="Root_Button_OnClick">
+    <Button x:Name="Root_Button" Content="{x:Bind Glyph, Mode=OneWay}" Background="{x:Bind Background, Mode=OneWay}" Foreground="{x:Bind Foreground, Mode=OneWay}" Width="{x:Bind Width, Mode=OneWay}" Height="{x:Bind Height, Mode=OneWay}" FontFamily="{x:Bind FontSize, Mode=OneWay}" FontSize="{x:Bind FontSize, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="{x:Bind HorizontalContentAlignment, Mode=OneWay}" VerticalContentAlignment="{x:Bind VerticalContentAlignment, Mode=OneWay}" Click="Root_Button_OnClick">
         <Button.Template>
             <ControlTemplate TargetType="Button">
                 <Grid x:Name="RootGrid">
@@ -55,6 +55,8 @@
                     <Ellipse Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="{TemplateBinding Background}"/>
                     <Ellipse x:Name="Dark_Ellipse" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="Black" Opacity="0"/>
                     <Ellipse x:Name="Light_Ellipse" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="White" Opacity="0"/>
+
+                    <ContentPresenter Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}"/>
                 </Grid>
             </ControlTemplate>
         </Button.Template>
