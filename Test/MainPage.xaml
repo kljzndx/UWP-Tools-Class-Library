@@ -9,5 +9,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <pctol:FloatingActionButton Width="100" Height="100" FontSize="24" Glyph="&#xE114;"/>
     </Grid>
 </Page>

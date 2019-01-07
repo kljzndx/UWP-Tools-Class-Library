@@ -126,9 +126,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HappyStudio.UwpToolsLibrary.Control">
-      <Version>1.4.2</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.9</Version>
     </PackageReference>
@@ -137,6 +134,10 @@
     <ProjectReference Include="..\Auxiliarys\HappyStudio.UwpToolsLibrary.Auxiliarys.csproj">
       <Project>{689edf47-eb1a-44e3-8454-7505c41d7520}</Project>
       <Name>HappyStudio.UwpToolsLibrary.Auxiliarys</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Control\HappyStudio.UwpToolsLibrary.Control.csproj">
+      <Project>{9be5f558-b0fd-47fc-bfdf-c6dc34e24ec3}</Project>
+      <Name>HappyStudio.UwpToolsLibrary.Control</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
