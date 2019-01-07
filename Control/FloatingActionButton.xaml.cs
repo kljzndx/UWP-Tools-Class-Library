@@ -26,7 +26,7 @@ namespace HappyStudio.UwpToolsLibrary.Control
         }
 
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
-            nameof(Glyph), typeof(string), typeof(FloatingActionButton), new PropertyMetadata('\uE115'));
+            nameof(Glyph), typeof(string), typeof(FloatingActionButton), new PropertyMetadata("\uE115"));
 
         public string Glyph
         {
