@@ -8,10 +8,11 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
+
     Width="48" Height="48"
     Background="{ThemeResource SystemControlBackgroundAccentBrush}"
     Foreground="White"
-    FontFamily="Segoe MDL2 Assets" FontSize="{ThemeResource TextStyleLargeFontSize}"
+    FontFamily="Segoe MDL2 Assets" FontSize="18"
     HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 
     <Button x:Name="Root_Button" Background="{x:Bind Background, Mode=OneWay}" Foreground="{x:Bind Foreground, Mode=OneWay}" Width="{x:Bind Width, Mode=OneWay}" Height="{x:Bind Height, Mode=OneWay}" FontSize="{x:Bind FontSize, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="{x:Bind HorizontalContentAlignment, Mode=OneWay}" VerticalContentAlignment="{x:Bind VerticalContentAlignment, Mode=OneWay}" Click="Root_Button_OnClick">
