@@ -110,6 +110,9 @@
     <Compile Include="Expander.xaml.cs">
       <DependentUpon>Expander.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FloatingActionButton.xaml.cs">
+      <DependentUpon>FloatingActionButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FrostedGlassBackground.xaml.cs">
       <DependentUpon>FrostedGlassBackground.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Expander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FloatingActionButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
