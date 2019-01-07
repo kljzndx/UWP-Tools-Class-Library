@@ -25,6 +25,7 @@ namespace Test
         public MainPage()
         {
             this.InitializeComponent();
+            new SettingsTest();
         }
     }
 }
