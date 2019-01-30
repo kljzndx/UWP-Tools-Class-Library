@@ -15,6 +15,12 @@
     FontFamily="Segoe MDL2 Assets" FontSize="18"
     HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 
+    <UserControl.Transitions>
+        <TransitionCollection>
+            <RepositionThemeTransition/>
+        </TransitionCollection>
+    </UserControl.Transitions>
+
     <Button x:Name="Root_Button" Content="{x:Bind Glyph, Mode=OneWay}" Background="{x:Bind Background, Mode=OneWay}" Foreground="{x:Bind Foreground, Mode=OneWay}" Width="{x:Bind Width, Mode=OneWay}" Height="{x:Bind Height, Mode=OneWay}" FontFamily="{x:Bind FontFamily, Mode=OneWay}" FontSize="{x:Bind FontSize, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="{x:Bind HorizontalContentAlignment, Mode=OneWay}" VerticalContentAlignment="{x:Bind VerticalContentAlignment, Mode=OneWay}" Click="Root_Button_OnClick">
         <Button.Template>
             <ControlTemplate TargetType="Button">
