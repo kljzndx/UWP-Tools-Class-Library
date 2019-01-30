@@ -52,7 +52,7 @@
                         </VisualStateGroup>
                     </VisualStateManager.VisualStateGroups>
 
-                    <Ellipse Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="{TemplateBinding Background}"/>
+                    <Ellipse Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
                     <Ellipse x:Name="Dark_Ellipse" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="Black" Opacity="0"/>
                     <Ellipse x:Name="Light_Ellipse" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="White" Opacity="0"/>
 
