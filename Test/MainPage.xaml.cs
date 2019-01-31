@@ -29,8 +29,9 @@ namespace Test
             new SettingsTest();
         }
 
-        private async void FloatingActionButton_OnClick(object sender, RoutedEventArgs e)
+        private async void FloatingActionButton_OnClick(object sender, TappedRoutedEventArgs e)
         {
+            e.Handled = true;
             await new MessageDialog("hello world").ShowAsync();
         }
     }

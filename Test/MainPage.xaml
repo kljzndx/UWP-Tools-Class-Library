@@ -9,6 +9,18 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <pctol:FloatingActionButton BorderBrush="Black" BorderThickness="10" Width="100" Height="100" FontSize="24" Content="&#xE114;" Click="FloatingActionButton_OnClick"/>
+        <GridView>
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="x:Int32">
+                    <pctol:FloatingActionButton BorderBrush="Black" BorderThickness="10" Width="100" Height="100" FontSize="24" Content="&#xE114;" Tapped="FloatingActionButton_OnClick"/>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <x:Int32>44</x:Int32>
+            <x:Int32>44</x:Int32>
+            <x:Int32>44</x:Int32>
+            <x:Int32>44</x:Int32>
+            <x:Int32>44</x:Int32>
+            <x:Int32>44</x:Int32>
+        </GridView>
     </Grid>
 </Page>
