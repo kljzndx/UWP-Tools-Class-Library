@@ -18,27 +18,80 @@ using Windows.UI.Xaml.Navigation;
 
 namespace HappyStudio.UwpToolsLibrary.Control
 {
-    public sealed partial class FloatingActionButton : UserControl
+    public sealed partial class FloatingActionButton : ContentControl
     {
+        public new static readonly DependencyProperty BorderThicknessProperty = DependencyProperty.Register(
+            nameof(BorderThickness), typeof(double), typeof(FloatingActionButton), new PropertyMetadata(0D));
+
         public FloatingActionButton()
         {
             this.InitializeComponent();
         }
 
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
-            nameof(Glyph), typeof(string), typeof(FloatingActionButton), new PropertyMetadata("\uE115"));
-
+        [Obsolete("Please use 'Content' property")]
         public string Glyph
         {
-            get => (string) GetValue(GlyphProperty);
-            set => SetValue(GlyphProperty, value);
+            get => (string) Content;
+            set => Content = value;
         }
 
+        public new double BorderThickness
+        {
+            get => (double) GetValue(BorderThicknessProperty);
+            set => SetValue(BorderThicknessProperty, value);
+        }
+
+        [Obsolete("Please use 'Tapped' event")]
         public event RoutedEventHandler Click;
-        
-        private void Root_Button_OnClick(object sender, RoutedEventArgs e)
+
+        protected override void OnTapped(TappedRoutedEventArgs e)
         {
             Click?.Invoke(this, e);
+        }
+        
+        protected override void OnPointerEntered(PointerRoutedEventArgs e)
+        {
+            if (IsEnabled)
+                VisualStateManager.GoToState(this, "PointerOver", true);
+        }
+
+        protected override void OnPointerExited(PointerRoutedEventArgs e)
+        {
+            if (IsEnabled)
+                VisualStateManager.GoToState(this, "Normal", true);
+        }
+
+        protected override void OnPointerPressed(PointerRoutedEventArgs e)
+        {
+            if (IsEnabled)
+                VisualStateManager.GoToState(this, "Pressed", true);
+        }
+
+        protected override void OnPointerReleased(PointerRoutedEventArgs e)
+        {
+            if (IsEnabled)
+                VisualStateManager.GoToState(this, "Normal", true);
+        }
+
+        protected override void OnPointerCaptureLost(PointerRoutedEventArgs e)
+        {
+            if (IsEnabled)
+                VisualStateManager.GoToState(this, "Normal", true);
+        }
+
+        protected override void OnPointerCanceled(PointerRoutedEventArgs e)
+        {
+            if (IsEnabled)
+                VisualStateManager.GoToState(this, "Normal", true);
+        }
+
+        private void FloatingActionButton_OnIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            bool isEnabled = (bool) e.NewValue;
+            if (isEnabled)
+                VisualStateManager.GoToState(this, "Normal", true);
+            else
+                VisualStateManager.GoToState(this, "Disabled", true);
         }
     }
 }
