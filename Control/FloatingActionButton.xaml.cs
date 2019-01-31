@@ -51,36 +51,42 @@ namespace HappyStudio.UwpToolsLibrary.Control
         
         protected override void OnPointerEntered(PointerRoutedEventArgs e)
         {
+            e.Handled = true;
             if (IsEnabled)
                 VisualStateManager.GoToState(this, "PointerOver", true);
         }
 
         protected override void OnPointerExited(PointerRoutedEventArgs e)
         {
+            e.Handled = true;
             if (IsEnabled)
                 VisualStateManager.GoToState(this, "Normal", true);
         }
 
         protected override void OnPointerPressed(PointerRoutedEventArgs e)
         {
+            e.Handled = true;
             if (IsEnabled)
                 VisualStateManager.GoToState(this, "Pressed", true);
         }
 
         protected override void OnPointerReleased(PointerRoutedEventArgs e)
         {
+            e.Handled = true;
             if (IsEnabled)
                 VisualStateManager.GoToState(this, "Normal", true);
         }
 
         protected override void OnPointerCaptureLost(PointerRoutedEventArgs e)
         {
+            e.Handled = true;
             if (IsEnabled)
                 VisualStateManager.GoToState(this, "Normal", true);
         }
 
         protected override void OnPointerCanceled(PointerRoutedEventArgs e)
         {
+            e.Handled = true;
             if (IsEnabled)
                 VisualStateManager.GoToState(this, "Normal", true);
         }
