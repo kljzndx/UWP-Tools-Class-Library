@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -26,6 +27,10 @@ namespace HappyStudio.UwpToolsLibrary.Control
         public FloatingActionButton()
         {
             this.InitializeComponent();
+            if (ApiInformation.IsEventPresent("Windows.UI.Xaml.UIElement", "ProcessKeyboardAccelerators"))
+            {
+                this.ProcessKeyboardAccelerators += FloatingActionButton_ProcessKeyboardAccelerators;
+            }
         }
 
         [Obsolete("Please use 'Content' property")]
@@ -41,7 +46,6 @@ namespace HappyStudio.UwpToolsLibrary.Control
             set => SetValue(BorderThicknessProperty, value);
         }
 
-        [Obsolete("Please use 'Tapped' event")]
         public event RoutedEventHandler Click;
 
         protected override void OnTapped(TappedRoutedEventArgs e)
@@ -98,6 +102,11 @@ namespace HappyStudio.UwpToolsLibrary.Control
                 VisualStateManager.GoToState(this, "Normal", true);
             else
                 VisualStateManager.GoToState(this, "Disabled", true);
+        }
+
+        private void FloatingActionButton_ProcessKeyboardAccelerators(UIElement sender, ProcessKeyboardAcceleratorEventArgs args)
+        {
+            Click?.Invoke(this, new RoutedEventArgs());
         }
     }
 }
