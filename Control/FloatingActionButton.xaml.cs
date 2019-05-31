@@ -8,6 +8,7 @@ using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Automation.Provider;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
@@ -19,7 +20,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace HappyStudio.UwpToolsLibrary.Control
 {
-    public sealed partial class FloatingActionButton : ContentControl
+    public sealed partial class FloatingActionButton : ContentControl, IInvokeProvider
     {
         public new static readonly DependencyProperty BorderThicknessProperty = DependencyProperty.Register(
             nameof(BorderThickness), typeof(double), typeof(FloatingActionButton), new PropertyMetadata(0D));
@@ -27,10 +28,6 @@ namespace HappyStudio.UwpToolsLibrary.Control
         public FloatingActionButton()
         {
             this.InitializeComponent();
-            if (ApiInformation.IsEventPresent("Windows.UI.Xaml.UIElement", "ProcessKeyboardAccelerators"))
-            {
-                this.ProcessKeyboardAccelerators += FloatingActionButton_ProcessKeyboardAccelerators;
-            }
         }
 
         [Obsolete("Please use 'Content' property")]
@@ -103,8 +100,8 @@ namespace HappyStudio.UwpToolsLibrary.Control
             else
                 VisualStateManager.GoToState(this, "Disabled", true);
         }
-
-        private void FloatingActionButton_ProcessKeyboardAccelerators(UIElement sender, ProcessKeyboardAcceleratorEventArgs args)
+        
+        public void Invoke()
         {
             Click?.Invoke(this, new RoutedEventArgs());
         }

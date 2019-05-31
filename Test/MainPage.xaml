@@ -12,7 +12,7 @@
         <GridView>
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="x:Int32">
-                    <pctol:FloatingActionButton BorderBrush="Black" BorderThickness="10" Width="100" Height="100" FontSize="24" Content="&#xE114;" Tapped="FloatingActionButton_OnClick"/>
+                    <TextBlock Text="{Binding}"/>
                 </DataTemplate>
             </GridView.ItemTemplate>
             <x:Int32>44</x:Int32>
@@ -22,5 +22,11 @@
             <x:Int32>44</x:Int32>
             <x:Int32>44</x:Int32>
         </GridView>
+
+        <pctol:FloatingActionButton BorderBrush="Black" BorderThickness="10" Width="100" Height="100" FontSize="24" Content="&#xE114;" Click="FloatingActionButton_OnClick">
+            <pctol:FloatingActionButton.KeyboardAccelerators>
+                <KeyboardAccelerator Key="A"/>
+            </pctol:FloatingActionButton.KeyboardAccelerators>
+        </pctol:FloatingActionButton>
     </Grid>
 </Page>
