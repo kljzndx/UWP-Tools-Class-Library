@@ -22,7 +22,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             _options.FolderDepth = FolderDepth.Deep;
         }
 
-        public async Task ScanByChangeTracker(Func<IEnumerable<KeyValuePair<string, StorageLibraryChangeType>>, Task> callback)
+        public async Task ScanByChangeTracker(Func<IEnumerable<StorageLibraryChange>, Task> callback)
         {
             _library.ChangeTracker.Enable();
             var reader =  _library.ChangeTracker.GetChangeReader();
@@ -49,8 +49,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
                     tempChanges.Add(changes.Dequeue());
                 }
 
-                await callback.Invoke(tempChanges.Select(t =>
-                    new KeyValuePair<string, StorageLibraryChangeType>(t.Path, t.ChangeType)));
+                await callback.Invoke(tempChanges);
             }
 
             await reader.AcceptChangesAsync();
