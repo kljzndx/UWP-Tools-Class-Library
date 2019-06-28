@@ -81,7 +81,12 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
                 return;
 
             if (settingValue is null)
-                SettingContainer.Values[settingName ?? propertyName] = value;
+            {
+                if (typeof(T).GetTypeInfo().IsEnum)
+                    SettingContainer.Values[settingName ?? propertyName] = value.ToString();
+                else
+                    SettingContainer.Values[settingName ?? propertyName] = value;
+            }
             else
                 SettingContainer.Values[settingName ?? propertyName] = settingValue;
 
