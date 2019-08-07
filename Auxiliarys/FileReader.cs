@@ -32,11 +32,15 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             return content;
         }
 
-        public static async Task<List<string>> ReadLines(StorageFile file, string secondaryEncoding, int maxCount = 0)
+        public static async Task<List<string>> ReadLines(StorageFile file, string secondaryEncoding, int maxCount = 0, bool isReverse = false)
         {
             var text = await ReadText(file, secondaryEncoding);
 
-            var split = text.Split(text.Contains("\n") ? '\n' : '\r');
+            IEnumerable<string> split = text.Split(text.Contains("\n") ? '\n' : '\r');
+
+            if (isReverse)
+                split = split.Reverse();
+
             if (maxCount > 0)
                 return split.Take(maxCount).Select(s => s.Trim()).ToList();
 
