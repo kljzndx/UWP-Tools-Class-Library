@@ -108,6 +108,7 @@
     <Compile Include="Attributes\SettingFieldByEnumAttribute.cs" />
     <Compile Include="Attributes\SettingFieldByNormalAttribute.cs" />
     <Compile Include="EmailEx.cs" />
+    <Compile Include="FileReader.cs" />
     <Compile Include="LibraryFileScanner.cs" />
     <Compile Include="MessageBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
