@@ -26,12 +26,6 @@ namespace Test
         public MainPage()
         {
             this.InitializeComponent();
-            new SettingsTest();
-        }
-
-        private async void FloatingActionButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            await new MessageDialog("hello world").ShowAsync();
         }
     }
 }
