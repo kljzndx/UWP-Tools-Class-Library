@@ -26,6 +26,12 @@ namespace HappyStudio.UwpToolsLibrary.Control
     /// </summary>
     public sealed partial class FrostedGlassBackground : UserControl
     {
+        public static readonly DependencyProperty GlassBackgroundBrushProperty =
+            DependencyProperty.Register(nameof(GlassBackgroundBrush), typeof(Brush), typeof(FrostedGlassBackground), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty GlassOpacityProperty =
+            DependencyProperty.Register(nameof(GlassOpacity), typeof(double), typeof(FrostedGlassBackground), new PropertyMetadata(0.7));
+
         private bool _isOn;
 
         public FrostedGlassBackground()
@@ -34,44 +40,17 @@ namespace HappyStudio.UwpToolsLibrary.Control
             Window.Current.Activated += Window_Activated;
         }
 
-        private void Window_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
-        {
-            if(_isOn)
-                switch (e.WindowActivationState)
-                {
-                    case CoreWindowActivationState.CodeActivated:
-                    case CoreWindowActivationState.PointerActivated:
-                        GlassFadeIn_Storyboard.Begin();
-                        break;
-                    case CoreWindowActivationState.Deactivated:
-                        GlassFadeOut_Storyboard.Begin();
-                        break;
-                }
-        }
-
         public Brush GlassBackgroundBrush
         {
-            get { return (Brush)GetValue(GlassBackgroundBrushProperty); }
-            set { SetValue(GlassBackgroundBrushProperty, value); }
+            get => (Brush)GetValue(GlassBackgroundBrushProperty);
+            set => SetValue(GlassBackgroundBrushProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for GlassBackgroundBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty GlassBackgroundBrushProperty =
-            DependencyProperty.Register("GlassBackgroundBrush", typeof(Brush), typeof(FrostedGlassBackground), new PropertyMetadata(null));
-
-
 
         public double GlassOpacity
         {
-            get { return (double)GetValue(GlassOpacityProperty); }
-            set { SetValue(GlassOpacityProperty, value); }
+            get => (double)GetValue(GlassOpacityProperty);
+            set => SetValue(GlassOpacityProperty, value);
         }
-
-        // Using a DependencyProperty as the backing store for GlassOpacity.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty GlassOpacityProperty =
-            DependencyProperty.Register("GlassOpacity", typeof(double), typeof(FrostedGlassBackground), new PropertyMetadata(0.7));
-
-
 
         private void InitializeFrostedGlass(UIElement glassHost)
         {
@@ -95,6 +74,21 @@ namespace HappyStudio.UwpToolsLibrary.Control
                 InitializeFrostedGlass(Glass_Rectangle);
                 _isOn = true;
             }
+        }
+
+        private void Window_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
+        {
+            if (_isOn)
+                switch (e.WindowActivationState)
+                {
+                    case CoreWindowActivationState.CodeActivated:
+                    case CoreWindowActivationState.PointerActivated:
+                        GlassFadeIn_Storyboard.Begin();
+                        break;
+                    case CoreWindowActivationState.Deactivated:
+                        GlassFadeOut_Storyboard.Begin();
+                        break;
+                }
         }
     }
 }
