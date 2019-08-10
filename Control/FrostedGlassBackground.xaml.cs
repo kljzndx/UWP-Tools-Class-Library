@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
+using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -32,12 +33,9 @@ namespace HappyStudio.UwpToolsLibrary.Control
         public static readonly DependencyProperty GlassOpacityProperty =
             DependencyProperty.Register(nameof(GlassOpacity), typeof(double), typeof(FrostedGlassBackground), new PropertyMetadata(0.7));
 
-        private bool _isOn;
-
         public FrostedGlassBackground()
         {
             this.InitializeComponent();
-            Window.Current.Activated += Window_Activated;
         }
 
         public Brush GlassBackgroundBrush
@@ -52,43 +50,21 @@ namespace HappyStudio.UwpToolsLibrary.Control
             set => SetValue(GlassOpacityProperty, value);
         }
 
-        private void InitializeFrostedGlass(UIElement glassHost)
+        private void InitializeFrostedGlass()
         {
-            Visual hostVisual = ElementCompositionPreview.GetElementVisual(glassHost);
-            Compositor compositor = hostVisual.Compositor;
-            var backdropBrush = compositor.CreateHostBackdropBrush();
-            var glassVisual = compositor.CreateSpriteVisual();
-            glassVisual.Brush = backdropBrush;
-            ElementCompositionPreview.SetElementChildVisual(glassHost, glassVisual);
-            var bindSizeAnimation = compositor.CreateExpressionAnimation("hostVisual.Size");
-            bindSizeAnimation.SetReferenceParameter("hostVisual", hostVisual);
-            glassVisual.StartAnimation("Size", bindSizeAnimation);
+            if (ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.AcrylicBrush"))
+            {
+                AcrylicBrush brush = new AcrylicBrush();
+                brush.BackgroundSource = AcrylicBackgroundSource.HostBackdrop;
+                brush.TintColor = Colors.Transparent;
+                brush.TintOpacity = 0;
+                Glass_Rectangle.Fill = brush;
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ApiInformation.IsTypePresent("Windows.UI.Composition.CompositionBackdropBrush") &&
-                ApiInformation.IsMethodPresent("Windows.UI.Composition.Compositor", "CreateHostBackdropBrush"))
-            {
-                this.FindName("Root_Grid");
-                InitializeFrostedGlass(Glass_Rectangle);
-                _isOn = true;
-            }
-        }
-
-        private void Window_Activated(object sender, WindowActivatedEventArgs e)
-        {
-            if (_isOn)
-                switch (e.WindowActivationState)
-                {
-                    case CoreWindowActivationState.CodeActivated:
-                    case CoreWindowActivationState.PointerActivated:
-                        GlassFadeIn_Storyboard.Begin();
-                        break;
-                    case CoreWindowActivationState.Deactivated:
-                        GlassFadeOut_Storyboard.Begin();
-                        break;
-                }
+            InitializeFrostedGlass();
         }
     }
 }
