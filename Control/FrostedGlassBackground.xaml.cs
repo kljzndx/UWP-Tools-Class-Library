@@ -76,7 +76,7 @@ namespace HappyStudio.UwpToolsLibrary.Control
             }
         }
 
-        private void Window_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
+        private void Window_Activated(object sender, WindowActivatedEventArgs e)
         {
             if (_isOn)
                 switch (e.WindowActivationState)
