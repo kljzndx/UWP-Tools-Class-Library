@@ -59,13 +59,20 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
         {
             foreach (var libraryFolder in _library.Folders)
             {
-                uint id = 0;
                 var queryResult = libraryFolder.CreateFileQueryWithOptions(_options);
                 uint count = await queryResult.GetItemCountAsync();
-                while (id < count)
+
+                for (uint id = 0; id < count; id += 400)
                 {
-                    await callback.Invoke(await queryResult.GetFilesAsync(id, 100));
-                    id += 100;
+                    List<Task> list = new List<Task>();
+                    for (uint i = id; i < id + 400; i += 100)
+                        if (i < count)
+                            list.Add(callback.Invoke(await queryResult.GetFilesAsync(i, 100)));
+                        else
+                            break;
+
+                    Task.WaitAll(list.ToArray());
+                    list.Clear();
                 }
             }
         }
