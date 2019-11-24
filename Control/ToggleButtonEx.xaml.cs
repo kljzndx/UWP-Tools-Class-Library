@@ -68,7 +68,7 @@ namespace HappyStudio.UwpToolsLibrary.Control
             if (!AllButtons.ContainsKey(button.GroupName))
                 lock (SetUpLocker)
                     if (!AllButtons.ContainsKey(button.GroupName))
-                        AllButtons.Add(button.GroupName, new List<ToggleButtonEx>{button});
+                        AllButtons.Add(button.GroupName, new List<ToggleButtonEx>());
 
             AllButtons[button.GroupName].Add(button);
         }
