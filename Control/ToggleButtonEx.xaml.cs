@@ -23,7 +23,7 @@ namespace HappyStudio.UwpToolsLibrary.Control
         private static readonly Dictionary<string, List<ToggleButtonEx>> AllButtons = new Dictionary<string, List<ToggleButtonEx>>();
 
         public static readonly DependencyProperty GroupNameProperty = DependencyProperty.Register(
-            nameof(GroupName), typeof(string), typeof(ToggleButtonEx), new PropertyMetadata(String.Empty));
+            nameof(GroupName), typeof(string), typeof(ToggleButtonEx), new PropertyMetadata(String.Empty, GroupName_PropertyChangedCallback));
 
         public static readonly DependencyProperty IsSingleProperty = DependencyProperty.Register(
             nameof(IsSingle), typeof(bool), typeof(ToggleButtonEx), new PropertyMetadata(false));
@@ -63,14 +63,25 @@ namespace HappyStudio.UwpToolsLibrary.Control
             this.IsChecked = true;
         }
 
-        private static void SetUpGroup(ToggleButtonEx button)
+        private static void SetUpGroup(ToggleButtonEx button, string groupName = null)
         {
-            if (!AllButtons.ContainsKey(button.GroupName))
+            string gn = groupName ?? button.GroupName;
+            if (!AllButtons.ContainsKey(gn))
                 lock (SetUpLocker)
-                    if (!AllButtons.ContainsKey(button.GroupName))
-                        AllButtons.Add(button.GroupName, new List<ToggleButtonEx>());
+                    if (!AllButtons.ContainsKey(gn))
+                        AllButtons.Add(gn, new List<ToggleButtonEx>());
 
-            AllButtons[button.GroupName].Add(button);
+            AllButtons[gn].Add(button);
+        }
+
+        private static void GroupName_PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var theButton = (ToggleButtonEx) d;
+            string oldName = e.OldValue.ToString();
+            if (!String.IsNullOrWhiteSpace(oldName) && AllButtons.ContainsKey(oldName))
+                AllButtons[oldName].Remove(theButton);
+
+            SetUpGroup(theButton, e.NewValue.ToString());
         }
     }
 }
