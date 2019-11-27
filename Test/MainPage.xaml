@@ -8,14 +8,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <pctol:FrostedGlassBackground x:Name="MyGlassBackground" GlassBackgroundBrush="{ThemeResource SystemControlBackgroundAccentBrush}" GlassOpacity="0"/>
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style TargetType="pctol:ToggleButtonEx">
+                <Setter Property="IsSingle" Value="True"/>
+                <Setter Property="GroupName" Value="Test"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
+        </StackPanel.Resources>
 
-        <Border Width="210" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border.Background>
-                <SolidColorBrush Color="White" Opacity="0.4"/>
-            </Border.Background>
-            <Slider Header="毛玻璃不透明度" Value="{x:Bind MyGlassBackground.GlassOpacity, Mode=TwoWay}" Maximum="1" StepFrequency="0.01" SmallChange="0.01"/>
-        </Border>
-    </Grid>
+        <pctol:ToggleButtonEx Content="Test1"/>
+        <pctol:ToggleButtonEx Content="Test2"/>
+        <pctol:ToggleButtonEx Content="Test3"/>
+        <pctol:ToggleButtonEx Content="Test4"/>
+    </StackPanel>
 </Page>
