@@ -31,8 +31,6 @@ namespace HappyStudio.UwpToolsLibrary.Control
         public ToggleButtonEx()
         {
             this.InitializeComponent();
-            if (!String.IsNullOrWhiteSpace(GroupName))
-                SetUpGroup(this);
         }
 
         public string GroupName
@@ -46,7 +44,15 @@ namespace HappyStudio.UwpToolsLibrary.Control
             get => (bool) GetValue(IsSingleProperty);
             set => SetValue(IsSingleProperty, value);
         }
-        
+
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (!String.IsNullOrWhiteSpace(GroupName))
+                SetUpGroup(this);
+        }
+
         private void ToggleButtonEx_Checked(object sender, RoutedEventArgs e)
         {
             if (IsSingle && !String.IsNullOrWhiteSpace(GroupName))
