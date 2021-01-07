@@ -13,14 +13,24 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
         private StorageLibrary _library;
         private QueryOptions _options;
 
-        public LibraryFileScanner(StorageLibrary library, IndexerOption indexerOption, params string[] extensionNames)
+        public LibraryFileScanner(StorageLibrary library, params string[] extensionNames)
         {
             _library = library;
             _options = new QueryOptions(CommonFileQuery.OrderByName, extensionNames.Select(s => s.Trim())
                 .Select(en => en.FirstOrDefault() != '.' ? "." + en : en));
 
             _options.FolderDepth = FolderDepth.Deep;
+        }
+
+        public LibraryFileScanner(StorageLibrary library, IndexerOption indexerOption, params string[] extensionNames) : this(library, extensionNames)
+        {
             _options.IndexerOption = indexerOption;
+        }
+
+        public LibraryFileScanner(StorageLibrary library, QueryOptions queryOptions)
+        {
+            _library = library;
+            _options = queryOptions;
         }
 
         public async Task ScanByChangeTracker(Func<IEnumerable<StorageLibraryChange>, Task> callback, uint maxCountInOneList = 10)
