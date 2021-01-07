@@ -60,7 +60,8 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
                     tempChanges.Add(changes.Dequeue());
                 }
 
-                await callback.Invoke(tempChanges);
+                if (tempChanges.Any())
+                    await callback.Invoke(tempChanges);
             }
 
             await reader.AcceptChangesAsync();
