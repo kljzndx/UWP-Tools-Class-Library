@@ -22,7 +22,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             _options.FolderDepth = FolderDepth.Deep;
         }
 
-        public async Task ScanByChangeTracker(Func<IEnumerable<StorageLibraryChange>, Task> callback)
+        public async Task ScanByChangeTracker(Func<IEnumerable<StorageLibraryChange>, Task> callback, uint maxCountInOneList = 10)
         {
             _library.ChangeTracker.Enable();
             var reader =  _library.ChangeTracker.GetChangeReader();
@@ -41,7 +41,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             while (changes.Any())
             {
                 var tempChanges = new List<StorageLibraryChange>();
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < maxCountInOneList; i++)
                 {
                     if (!changes.Any())
                         break;
@@ -55,7 +55,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             await reader.AcceptChangesAsync();
         }
 
-        public async Task ScanByFolder(Func<IEnumerable<StorageFile>, Task> callback)
+        public async Task ScanByFolder(Func<IEnumerable<StorageFile>, Task> callback, uint maxCountInOneList = 10)
         {
             foreach (var libraryFolder in _library.Folders)
             {
@@ -64,8 +64,8 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
                 uint count = await queryResult.GetItemCountAsync();
                 while (id < count)
                 {
-                    await callback.Invoke(await queryResult.GetFilesAsync(id, 100));
-                    id += 100;
+                    await callback.Invoke(await queryResult.GetFilesAsync(id, maxCountInOneList));
+                    id += maxCountInOneList;
                 }
             }
         }
