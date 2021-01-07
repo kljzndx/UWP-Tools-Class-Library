@@ -41,6 +41,8 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             var changes = new Queue<StorageLibraryChange>(
                 allFileChanges.Where(c =>
                     c.IsOfType(StorageItemTypes.Folder) ||
+                    c.IsOfType(StorageItemTypes.None) &&
+                    c.ChangeType == StorageLibraryChangeType.Deleted ||
                     c.IsOfType(StorageItemTypes.File) &&
                     _options.FileTypeFilter.Any(s => s.Replace(".", String.Empty) == c.Path.Split('.').LastOrDefault()))
             );
@@ -63,8 +65,10 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
 
                     if (change.IsOfType(StorageItemTypes.File))
                         tempChanges.Add(new KeyValuePair<StorageItemTypes, StorageLibraryChange>(StorageItemTypes.File, change));
-                    else
+                    else if (change.IsOfType(StorageItemTypes.Folder))
                         tempChanges.Add(new KeyValuePair<StorageItemTypes, StorageLibraryChange>(StorageItemTypes.Folder, change));
+                    else
+                        tempChanges.Add(new KeyValuePair<StorageItemTypes, StorageLibraryChange>(StorageItemTypes.None, change));
                 }
 
                 if (tempChanges.Any())
