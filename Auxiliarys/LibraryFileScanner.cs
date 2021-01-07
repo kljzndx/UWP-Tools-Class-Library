@@ -33,13 +33,15 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             _options = queryOptions;
         }
 
-        public async Task ScanByChangeTracker(Func<IEnumerable<StorageLibraryChange>, Task> callback, uint maxCountInOneList = 10)
+        public async Task ScanByChangeTracker(Func<IEnumerable<KeyValuePair<StorageItemTypes, StorageLibraryChange>>, Task> callback, uint maxCountInOneList = 10)
         {
             _library.ChangeTracker.Enable();
             var reader =  _library.ChangeTracker.GetChangeReader();
-            var allFileChanges = (await reader.ReadBatchAsync()).Where(c => c.IsOfType(StorageItemTypes.File));
+            var allFileChanges = await reader.ReadBatchAsync();
             var changes = new Queue<StorageLibraryChange>(
                 allFileChanges.Where(c =>
+                    c.IsOfType(StorageItemTypes.Folder) ||
+                    c.IsOfType(StorageItemTypes.File) &&
                     _options.FileTypeFilter.Any(s => s.Replace(".", String.Empty) == c.Path.Split('.').LastOrDefault()))
             );
 
@@ -51,13 +53,18 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
 
             while (changes.Any())
             {
-                var tempChanges = new List<StorageLibraryChange>();
+                var tempChanges = new List<KeyValuePair<StorageItemTypes, StorageLibraryChange>>();
                 for (int i = 0; i < maxCountInOneList; i++)
                 {
                     if (!changes.Any())
                         break;
 
-                    tempChanges.Add(changes.Dequeue());
+                    var change = changes.Dequeue();
+
+                    if (change.IsOfType(StorageItemTypes.File))
+                        tempChanges.Add(new KeyValuePair<StorageItemTypes, StorageLibraryChange>(StorageItemTypes.File, change));
+                    else
+                        tempChanges.Add(new KeyValuePair<StorageItemTypes, StorageLibraryChange>(StorageItemTypes.Folder, change));
                 }
 
                 if (tempChanges.Any())
