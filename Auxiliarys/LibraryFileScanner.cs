@@ -25,11 +25,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             _options.FolderDepth = FolderDepth.Deep;
         }
 
-        public LibraryFileScanner(StorageLibrary library, QueryOptions queryOptions)
-        {
-            _library = library;
-            _options = queryOptions;
-        }
+        public QueryOptions Options => _options;
 
         public async Task ScanByChangeTracker(Func<IEnumerable<KeyValuePair<StorageItemTypes, StorageLibraryChange>>, Task> callback, uint maxCountInOneList = 10)
         {
