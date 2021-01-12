@@ -42,7 +42,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
                 allFileChanges.Where(c =>
                     !c.IsOfType(StorageItemTypes.File) ||
                     c.IsOfType(StorageItemTypes.File) &&
-                    _options.FileTypeFilter.Any(s => s.Replace(".", String.Empty) == c.Path.Split('.').LastOrDefault()))
+                    _options.FileTypeFilter.Any(s => s == ".*" || s.Replace(".", String.Empty) == c.Path.Split('.').LastOrDefault()))
             );
 
             if (changes.Any(c => c.ChangeType == StorageLibraryChangeType.ChangeTrackingLost))
