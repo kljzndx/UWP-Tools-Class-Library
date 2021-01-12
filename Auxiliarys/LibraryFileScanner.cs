@@ -25,11 +25,6 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             _options.FolderDepth = FolderDepth.Deep;
         }
 
-        public LibraryFileScanner(StorageLibrary library, IndexerOption indexerOption, params string[] extensionNames) : this(library, extensionNames)
-        {
-            _options.IndexerOption = indexerOption;
-        }
-
         public LibraryFileScanner(StorageLibrary library, QueryOptions queryOptions)
         {
             _library = library;
