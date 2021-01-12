@@ -40,9 +40,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             var allFileChanges = await reader.ReadBatchAsync();
             var changes = new Queue<StorageLibraryChange>(
                 allFileChanges.Where(c =>
-                    c.IsOfType(StorageItemTypes.Folder) ||
-                    c.IsOfType(StorageItemTypes.None) &&
-                    c.ChangeType == StorageLibraryChangeType.Deleted ||
+                    !c.IsOfType(StorageItemTypes.File) ||
                     c.IsOfType(StorageItemTypes.File) &&
                     _options.FileTypeFilter.Any(s => s.Replace(".", String.Empty) == c.Path.Split('.').LastOrDefault()))
             );
