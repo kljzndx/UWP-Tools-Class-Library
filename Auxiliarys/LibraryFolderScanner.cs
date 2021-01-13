@@ -24,6 +24,8 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
         {
             foreach (var libraryFolder in _library.Folders)
             {
+                await callback.Invoke(new[] { libraryFolder });
+
                 uint id = 0;
                 var queryResult = libraryFolder.CreateFolderQueryWithOptions(_options);
                 uint count = await queryResult.GetItemCountAsync();
@@ -48,7 +50,10 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
         public async Task ScanByRecursion(Func<StorageFolder, Task> callback)
         {
             foreach (var libraryFolder in _library.Folders)
+            {
+                await callback.Invoke(libraryFolder);
                 await ScanByRecursion(libraryFolder, callback);
+            }
         }
     }
 }
