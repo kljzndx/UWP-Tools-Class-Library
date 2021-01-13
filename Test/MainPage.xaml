@@ -8,18 +8,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel>
-        <StackPanel.Resources>
-            <Style TargetType="pctol:ToggleButtonEx">
-                <Setter Property="IsSingle" Value="True"/>
-                <Setter Property="GroupName" Value="Test"/>
-                <Setter Property="HorizontalAlignment" Value="Left"/>
-            </Style>
-        </StackPanel.Resources>
-
-        <pctol:ToggleButtonEx Content="Test1"/>
-        <pctol:ToggleButtonEx Content="Test2"/>
-        <pctol:ToggleButtonEx Content="Test3"/>
-        <pctol:ToggleButtonEx Content="Test4"/>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button x:Name="ScanFolder_Button" Content="文件夹扫描" Click="ScanFolder_Button_Click"/>
+            <TextBlock Grid.Column="1">
+                <TextBlock.Inlines>
+                    <Run Text="项目数量:"/>
+                    <Run Text="{x:Bind _strs.Count, Mode=OneWay}"/>
+                </TextBlock.Inlines>
+            </TextBlock>
+        </Grid>
+        <ListView Grid.Row="1" ItemsSource="{x:Bind _strs}"/>
+    </Grid>
 </Page>
