@@ -109,8 +109,11 @@
     <Compile Include="Attributes\SettingFieldByNormalAttribute.cs" />
     <Compile Include="EmailEx.cs" />
     <Compile Include="FileReader.cs" />
-    <Compile Include="LibraryFolderScanner.cs" />
-    <Compile Include="LibraryFileScanner.cs" />
+    <Compile Include="Files\FileReader.cs" />
+    <Compile Include="Files\Scanners\FileScanner.cs" />
+    <Compile Include="Files\Scanners\FolderScanner.cs" />
+    <Compile Include="Files\Scanners\LibraryFileScanner.cs" />
+    <Compile Include="Files\Scanners\LibraryFolderScanner.cs" />
     <Compile Include="MessageBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\SettingFieldBaseAttribute.cs" />

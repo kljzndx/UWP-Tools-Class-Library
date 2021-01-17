@@ -6,26 +6,20 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Search;
 
-namespace HappyStudio.UwpToolsLibrary.Auxiliarys
+namespace HappyStudio.UwpToolsLibrary.Auxiliarys.Files.Scanners
 {
     public class LibraryFileScanner
     {
         private StorageLibrary _library;
-        private string[] _extensionNames;
-        private QueryOptions _options;
+        private FileScanner _fileScanner;
 
         public LibraryFileScanner(StorageLibrary library, params string[] extensionNames)
         {
             _library = library;
-            _extensionNames = extensionNames.Select(s => s.Trim())
-                .Select(en => en.FirstOrDefault() == '.' ? en.Remove(0, 1) : en).ToArray();
-            _options = new QueryOptions(CommonFileQuery.OrderByName,
-                _extensionNames.Select(s => "." + s).ToArray());
-
-            _options.FolderDepth = FolderDepth.Deep;
+            _fileScanner = new FileScanner(extensionNames);
         }
 
-        public QueryOptions Options => _options;
+        public QueryOptions Options => _fileScanner.Options;
 
         public async Task ScanByChangeTracker(Func<IEnumerable<KeyValuePair<StorageItemTypes, StorageLibraryChange>>, Task> callback, uint maxCountInOneList = 10)
         {
@@ -35,7 +29,7 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
             var changes = new Queue<StorageLibraryChange>(
                 allFileChanges.Where(c =>
                     !c.IsOfType(StorageItemTypes.File) ||
-                    c.IsOfType(StorageItemTypes.File) && CheckExtensionName(c.Path))
+                    c.IsOfType(StorageItemTypes.File) && _fileScanner.CheckExtensionName(c.Path))
             );
 
             if (changes.Any(c => c.ChangeType == StorageLibraryChangeType.ChangeTrackingLost))
@@ -73,42 +67,10 @@ namespace HappyStudio.UwpToolsLibrary.Auxiliarys
         public Task ScanByFolder(Func<IEnumerable<StorageFile>, Task> callback, uint maxCountInOneList = 10)
             => ScanByFileQuery(callback, maxCountInOneList);
 
-        public async Task ScanByFileQuery(Func<IEnumerable<StorageFile>, Task> callback, uint maxCountInOneList = 10)
-        {
-            foreach (var libraryFolder in _library.Folders)
-            {
-                uint id = 0;
-                var queryResult = libraryFolder.CreateFileQueryWithOptions(_options);
-                uint count = await queryResult.GetItemCountAsync();
-                while (id < count)
-                {
-                    await callback.Invoke(await queryResult.GetFilesAsync(id, maxCountInOneList));
-                    id += maxCountInOneList;
-                }
-            }
-        }
+        public Task ScanByFileQuery(Func<IEnumerable<StorageFile>, Task> callback, uint maxCountInOneList = 10)
+            => _fileScanner.ScanByFileQuery(_library.Folders, callback, maxCountInOneList);
 
-        public async Task ScanByRecursion(Func<IEnumerable<StorageFile>, Task> callback, int maxCountInOneList = 10)
-        {
-            var fc = new LibraryFolderScanner(_library);
-
-            await fc.ScanByRecursion(async folder =>
-            {
-                var files = (await folder.GetFilesAsync()).Where(f => CheckExtensionName(f.Path)).ToList();
-                int id = 0;
-
-                while (id < files.Count)
-                {
-                    var items = files.Skip(id).Take(maxCountInOneList).ToList();
-                    await callback.Invoke(items);
-                    id += maxCountInOneList;
-                }
-            });
-        }
-
-        private bool CheckExtensionName(string path)
-        {
-            return _extensionNames.Any(s => s == ".*" || s == path.Split('.').LastOrDefault());
-        }
+        public Task ScanByRecursion(Func<IEnumerable<StorageFile>, Task> callback, int maxCountInOneList = 10)
+            => _fileScanner.ScanByRecursion(_library.Folders, callback, maxCountInOneList);
     }
 }
