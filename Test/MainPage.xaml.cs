@@ -1,4 +1,4 @@
-﻿using HappyStudio.UwpToolsLibrary.Auxiliarys;
+﻿using HappyStudio.UwpToolsLibrary.Auxiliarys.Files.Scanners;
 
 using System;
 using System.Collections.Generic;
