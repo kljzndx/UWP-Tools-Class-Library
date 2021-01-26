@@ -49,4 +49,80 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="local:ReelDialog" >
+        <Setter Property="MinWidth" Value="250"/>
+        <Setter Property="MinHeight" Value="150"/>
+        <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"/>
+        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ReelDialog">
+                    <Grid x:Name="Main_Grid" Visibility="Collapsed">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="Show_VisualState">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames  Storyboard.TargetName="Main_Grid" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                        </ObjectAnimationUsingKeyFrames>
+
+                                        <DoubleAnimation To="1" Duration="0:0:0.100" Storyboard.TargetName="Header_Transform" Storyboard.TargetProperty="ScaleX"/>
+                                        <DoubleAnimation To="1" Duration="0:0:0.100" BeginTime="0:0:0.100" Storyboard.TargetName="Body_Transform" Storyboard.TargetProperty="ScaleY"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Hide_VisualState">
+                                    <Storyboard>
+                                        <DoubleAnimation To="0" Duration="0:0:0.100" Storyboard.TargetName="Body_Transform" Storyboard.TargetProperty="ScaleY"/>
+                                        <DoubleAnimation To="0" Duration="0:0:0.100" BeginTime="0:0:0.100" Storyboard.TargetName="Header_Transform" Storyboard.TargetProperty="ScaleX"/>
+
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.200" Storyboard.TargetName="Main_Grid" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Padding="8,4" Background="{TemplateBinding Foreground}" RenderTransformOrigin="1,0">
+                            <Grid.RenderTransform>
+                                <CompositeTransform x:Name="Header_Transform" ScaleX="0"/>
+                            </Grid.RenderTransform>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter FontWeight="Bold" VerticalAlignment="Center" Foreground="White" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}"/>
+                            <Button x:Name="Close_Button" Grid.Column="1" VerticalAlignment="Center" RequestedTheme="Dark" Background="Transparent" Foreground="White" Padding="4" Margin="8,0,0,0">
+                                <FontIcon Glyph="&#xE106;" FontSize="15"/>
+                            </Button>
+                        </Grid>
+
+                        <Border Grid.Row="1" Background="{TemplateBinding Background}" RenderTransformOrigin="0,0">
+                            <Border.RenderTransform>
+                                <CompositeTransform x:Name="Body_Transform" ScaleY="0"/>
+                            </Border.RenderTransform>
+                            
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

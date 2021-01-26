@@ -120,6 +120,7 @@
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReelDialog.cs" />
     <Compile Include="ToggleButtonEx.xaml.cs">
       <DependentUpon>ToggleButtonEx.xaml</DependentUpon>
     </Compile>
