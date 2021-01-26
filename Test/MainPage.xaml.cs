@@ -51,5 +51,15 @@ namespace Test
                 })
             );
         }
+
+        private void Show_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Main_ReelDialog.Show();
+        }
+
+        private void Hide_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Main_ReelDialog.Hide();
+        }
     }
 }
