@@ -22,6 +22,9 @@ namespace HappyStudio.UwpToolsLibrary.Control
         public static readonly DependencyProperty HeaderTemplateProperty =
             DependencyProperty.Register(nameof(HeaderTemplate), typeof(DataTemplate), typeof(ReelDialog), new PropertyMetadata(null));
 
+        public event EventHandler Showed;
+        public event EventHandler Closed;
+
         public ReelDialog()
         {
             this.DefaultStyleKey = typeof(ReelDialog);
@@ -64,6 +67,12 @@ namespace HappyStudio.UwpToolsLibrary.Control
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
+            var svs = (VisualState)this.GetTemplateChild("Show_VisualState");
+            var hvs = (VisualState)this.GetTemplateChild("Hide_VisualState");
+
+            svs.Storyboard.Completed += (s, e) => Showed?.Invoke(this, EventArgs.Empty);
+            hvs.Storyboard.Completed += (s, e) => Closed?.Invoke(this, EventArgs.Empty);
 
             var cb = (Button)this.GetTemplateChild("Close_Button");
             cb.Click -= Close_Button_Click;
