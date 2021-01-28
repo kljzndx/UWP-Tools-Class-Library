@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -60,6 +61,18 @@ namespace Test
         private void Hide_Button_Click(object sender, RoutedEventArgs e)
         {
             Main_ReelDialog.Hide();
+        }
+
+        private void Main_ReelDialog_Showed(object sender, EventArgs e)
+        {
+            Show_Button.IsEnabled = false;
+            Hide_Button.IsEnabled = true;
+        }
+
+        private void Main_ReelDialog_Closed(object sender, EventArgs e)
+        {
+            Show_Button.IsEnabled = true;
+            Hide_Button.IsEnabled = false;
         }
     }
 }

@@ -16,9 +16,11 @@
 
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
             <Button x:Name="Show_Button" Content="显示弹窗" Click="Show_Button_Click"/>
-            <Button x:Name="Hide_Button" Content="隐藏弹窗" Click="Hide_Button_Click"/>
+            <Button x:Name="Hide_Button" Content="隐藏弹窗" IsEnabled="False" Click="Hide_Button_Click"/>
         </StackPanel>
         
-        <pctol:ReelDialog x:Name="Main_ReelDialog" Grid.Row="1" HorizontalAlignment="Right" Header="标题" Content="abcdabcdabcdabcdabcdabcd"/>
+        <pctol:ReelDialog x:Name="Main_ReelDialog" Grid.Row="1" HorizontalAlignment="Right"
+                          Header="标题" Content="abcdabcdabcdabcdabcdabcd"
+                          Showed="Main_ReelDialog_Showed" Closed="Main_ReelDialog_Closed"/>
     </Grid>
 </Page>
